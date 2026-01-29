@@ -15,12 +15,12 @@
           <th>Total</th>
           <th colspan="2">Acciones</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>NombreProducto</td>
-          <td>1500</td>
-          <td>800</td>
-          <td>1200000</td>
+        <tr th:each="producto : ${productos}">
+          <td th:text="${producto.idProducto}">1</td>
+          <td th:text="${producto.nombreProducto}">NombreProducto</td>
+          <td th:text="${producto.precioProducto}">1500</td>
+          <td th:text="${producto.cantidad}">800</td>
+          <td th:text="${producto.total}">1200000</td>
           <td class="justify-content-start"><button class="btn btn-outline-light"><i class="fa-solid fa-pen-to-square"></i><span>Editar</span></button></td>
           <td><button class="btn btn-outline-danger "><i class="fa-solid fa-trash"></i><span>Eliminar</span></button></td>
         </tr>
