@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">Título</title>
+
+
+    <!--            Bootstrap           -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/7.1.0/css/all.css}">
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fs-2" href="#"><i class="fa-solid fa-book"></i> <span th:text="#{header.titulo}"></span></a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"></button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav">
+                <li class="nav-item fs-4"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item fs-4"><a class="nav-link" href="#">Usuarios</a></li>
+            </ul>
+
+            <!-- 👇 grupo alineado a la derecha -->
+            <div class="d-flex align-items-center ms-auto gap-2">
+
+                <!-- Dropdown idioma -->
+                <div class="dropdown" data-bs-theme="dark">
+                    <button class="btn btn-outline-light dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fa-solid fa-earth-america"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="?lang=es">Español</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="?lang=en">English</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a class="btn btn-outline-light ms-auto" href="/logout">
+                    <i class="fa-solid fa-user"></i><span class="mx-2">Iniciar sesión</span>
+                </a>
+
+                <a class="btn btn-outline-light ms-auto" href="/logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Cerrar sesión</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<footer th:fragment="footer" data-bs-theme="dark">
+    <div class="bg-primary row mt-md-5 text-center p-5">
+        <h3>Derechos reservados</h3>
+    </div>
+</footer>
+
+</body>
+</html>
