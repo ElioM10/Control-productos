@@ -1,4 +1,4 @@
-package lpj.controlproductos.services;
+package lpj.controlproductos.services.interfaces;
 
 import lpj.controlproductos.model.Producto;
 

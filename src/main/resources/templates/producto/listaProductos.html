@@ -21,8 +21,9 @@
           <td th:text="${producto.precioProducto}">1500</td>
           <td th:text="${producto.cantidad}">800</td>
           <td th:text="${producto.total}">1200000</td>
-          <td class="justify-content-start"><button class="btn btn-outline-light"><i class="fa-solid fa-pen-to-square"></i><span>Editar</span></button></td>
-          <td><button class="btn btn-outline-danger "><i class="fa-solid fa-trash"></i><span>Eliminar</span></button></td>
+          <td><a class="btn btn-outline-light" th:href="@{/admin/editar/{id}(id = ${producto.idProducto})}" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+            <i class="fa-solid fa-pen-to-square"></i><span>Editar</span></a></td>
+          <td><a class="btn btn-outline-danger" th:href="@{/admin/eliminar/{id}(id = ${producto.idProducto})}"><i class="fa-solid fa-trash"></i><span>Eliminar</span></a></td>
         </tr>
       </table>
     </div>

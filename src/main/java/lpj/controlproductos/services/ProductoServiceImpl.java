@@ -2,6 +2,7 @@ package lpj.controlproductos.services;
 
 import lpj.controlproductos.model.Producto;
 import lpj.controlproductos.repositories.ProductoRepository;
+import lpj.controlproductos.services.interfaces.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class ProductoServiceImpl implements ProductoService{
+public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
     ProductoRepository productoRepository;

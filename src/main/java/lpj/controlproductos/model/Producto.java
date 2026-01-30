@@ -22,6 +22,14 @@ public class Producto implements Serializable {
 
     private Integer cantidad;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoriaProducto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_marca")
+    private Marca marcaProducto;
+
     public Double getTotal(){
         if(precioProducto == null || cantidad == null){
             return 0.0;

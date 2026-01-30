@@ -1,58 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Agregar Producto</title>
-</head>
-<body>
-<aside th:fragment="botonAgregar">
-    <div class="container">
-        <div class="row">
-            <div class="mt-3 text-center">
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregar"><i
-                        class="fa-solid fa-plus"></i><span> Agregar Producto</span>
-                </button>
-            </div>
-        </div>
-    </div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head th:replace="~{layout/plantilla :: head('Agregar Producto')}"></head>
+<body class="bg-info-subtle">
 
-    <div class="modal fade" id="modalAgregar" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title">Agregar Producto</h1>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+<header th:replace="~{layout/plantilla :: navbar}"></header>
+
+<section class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card mt-3">
+                <div class="card-header text-center">
+                    <h1>Agregar Producto</h1>
                 </div>
-                <div class="modal-body">
-                    <form th:action="@{/admin/agregar}" method="post" th:object="${producto}">
+                <div class="card-body">
+                    <form th:action="@{/admin/guardar}" th:object="${producto}" method="post">
                         <div class="mt-3">
-                            <label for="nombreProducto" class="form-label">Nombre del producto</label>
-                            <input class="form-control" type="text" id="nombreProducto" name="nombreProducto" required th:field="*{nombreProducto}">
+                            <label for="nombreProducto" class="form-label">Nombre Producto:</label>
+                            <input class="form-control" type="text" th:field="*{nombreProducto}" id="nombreProducto">
                         </div>
                         <div class="mt-3">
-                            <label for="precioProducto" class="form-label">Precio por unidad</label>
-                            <input class="form-control" type="number" id="precioProducto" name="precioProducto" min="0" required th:field="*{precioProducto}">
-                        </div>
-                        <div class="mt-3">
-                            <label for="cantidad" class="form-label">Cantidad</label>
-                            <input class="form-control" type="number" id="cantidad" name="cantidad" min="0" th:field="*{cantidad}">
-                        </div>
-                        <div class="mt-3">
-                            <label for="descripcion" class="form-label">Descripcion</label>
-                            <input class="form-control" type="text" id="descripcion" name="descripcion" th:field="*{descripcion}">
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
-                            <input type="submit" class="btn btn-success" value="Guardar">
+                            <label for="marca">Marca:</label>
+                            <select th:field="*{marcaProducto}" id="marca" class="form-select">
+                                <option value="" selected>Seleccione una marca</option>
+                                <option th:each="marca : ${marcas}"
+                                        th:value="${marca}"
+                                        th:text="${marca.nombreMarca}"
+                                ></option>
+                            </select></bu>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-
-</aside>
-
+<footer th:replace="~{/layout/plantilla :: footer}"></footer>
 </body>
 </html>
