@@ -29,13 +29,13 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional
-    public Producto save(Producto producto) {
+    public Producto saveProducto(Producto producto) {
         return productoRepository.save(producto);
     }
 
     @Override
     @Transactional
-    public void delete(Producto producto) {
+    public void deleteProducto(Producto producto) {
         productoRepository.delete(producto);
     }
 }

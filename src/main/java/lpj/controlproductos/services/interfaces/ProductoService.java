@@ -8,6 +8,6 @@ public interface ProductoService{
 
     public Producto getProductoById(Long idProducto);
     public List<Producto> getProductos();
-    public Producto save(Producto producto);
-    public void delete(Producto producto);
+    public Producto saveProducto(Producto producto);
+    public void deleteProducto(Producto producto);
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MarcaService {
 
-    public List<Marca> getAll();
+    public List<Marca> getMarcas();
 
     public Marca getMarcaById(Long idMarca);
 

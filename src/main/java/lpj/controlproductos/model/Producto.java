@@ -23,6 +23,10 @@ public class Producto implements Serializable {
     private Integer cantidad;
 
     @ManyToOne
+    @JoinColumn(name = "id_negocio")
+    private Negocio negocio;
+
+    @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoriaProducto;
 

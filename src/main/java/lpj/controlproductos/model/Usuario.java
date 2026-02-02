@@ -1,6 +1,7 @@
 package lpj.controlproductos.model;
 
 import jakarta.persistence.*;
+import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -11,13 +12,14 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuraio;
+    private Long idUsuario;
 
     private String username;
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Rol> roles;
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY)
+    private Set<DetallesUsuario> detalles;
+
 
 }

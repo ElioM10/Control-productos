@@ -16,7 +16,7 @@ public class CategoriaServiceImpl implements CategoriaService, Converter<String,
     CategoriaRepository categoriaRepository;
 
     @Override
-    public List<Categoria> getAll() {
+    public List<Categoria> getCategorias() {
         return categoriaRepository.findAll();
     }
 

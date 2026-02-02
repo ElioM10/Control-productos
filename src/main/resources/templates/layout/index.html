@@ -10,15 +10,17 @@
     <div class="container">
         <div class="row">
             <div class="mt-3 text-center">
-                <a th:href="@{/admin/agregar}" class="btn btn-primary"><i
-                        class="fa-solid fa-plus"></i><span> Agregar Producto</span>
+                <a th:href="@{/admin/agregarNegocio}" class="btn btn-primary"><i
+                        class="fa-solid fa-plus"></i><span> Agregar Negocio</span>
                 </a>
             </div>
         </div>
     </div>
 </nav>
 
-<section th:replace="~{/producto/listaProductos :: listaProductos}"></section>
+<section th:replace="~{/negocio/listarNegocios :: listaNegocios}"></section>
+
+<!--<section th:replace="~{/producto/listaProductos :: listaProductos}"></section>-->
 
 <footer th:replace="~{/layout/plantilla :: footer}"></footer>
 </body>

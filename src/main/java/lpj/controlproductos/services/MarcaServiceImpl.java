@@ -15,7 +15,7 @@ public class MarcaServiceImpl implements MarcaService {
     MarcaRepository marcaRepository;
 
     @Override
-    public List<Marca> getAll() {
+    public List<Marca> getMarcas() {
         return marcaRepository.findAll();
     }
 
