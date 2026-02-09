@@ -15,7 +15,7 @@
               <h1 class="card-title" th:text="${negocio.nombreNegocio}">Mi negocio</h1>
               <div class="d-flex gap-2">
                 <a class="btn btn-outline-secondary" th:href="@{/admin/negocio/editar/{id}(id=${negocio.idNegocio})}"><i class="fa-solid fa-pen-to-square"></i> </a>
-                <a class="btn btn-outline-danger" th:href="@{/admin/negocio/eliminar/{id}(id=${negocio.idNegocio})}"><i class="fa-solid fa-trash"></i> </a>
+                <a th:replace="~{negocio/eliminarNegocio :: botonEliminarNegocio}" ></a>
               </div>
             </div>
             <div class="card-body">
@@ -29,5 +29,7 @@
       </div>
     </div>
   </main>
+
+
 </body>
 </html>

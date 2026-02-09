@@ -1,12 +1,14 @@
 package lpj.controlproductos.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table
+@Data
 public class DetallesUsuario implements Serializable {
 
     @Id

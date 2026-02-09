@@ -40,7 +40,7 @@ public class RootController {
         List<Negocio> negocios = negocioService.listarNegocios();
 
         model.addAttribute("negocios",negocios);
-//        log.info("NEGOCIOS DISPONIBLES: "+ negocios);
+
         return "layout/index";
     }
 

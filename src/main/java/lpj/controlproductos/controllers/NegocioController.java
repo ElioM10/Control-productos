@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -26,4 +27,15 @@ public class NegocioController {
         return "negocio/agregarNegocio";
     }
 
+    @PostMapping("/admin/negocio/eliminar/{idNegocio}")
+    public String eliminar(@PathVariable Long idNegocio){
+        negocioService.deleteNegocio(negocioService.getNegocioById(idNegocio));
+        return "redirect:/";
+    }
+
+    @GetMapping("/admin/negocio/editar/{idNegocio}")
+    public String editar(@PathVariable Long idNegocio, Model model){
+        model.addAttribute("negocio",negocioService.getNegocioById(idNegocio));
+        return "negocio/editarNegocio";
+    }
 }
