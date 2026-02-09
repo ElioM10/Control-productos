@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head('Eliminar Producto')}"></head>
+<body>
+
+<a class="btn btn-outline-danger"
+   th:fragment="botonEliminarProducto" data-bs-toggle="modal"
+   th:attr="data-bs-target='#modalEliminarProducto' + ${producto.idProducto}"><i class="fa-solid fa-trash"></i><span>Eliminar</span></a>
+
+<div th:fragment="modalEliminarProducto">
+    <div th:each="producto : ${productos}">
+        <div class="modal fade" th:id="'modalEliminarProducto' + ${producto.idProducto}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title">Confirmar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h4>¿Seguro que desea eliminar este producto?</h4>
+                        <h5><strong th:text="${producto.nombreProducto}"></strong></h5>
+                        <p class="text-danger mt-2">Esta acción no se puede deshacer</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <form method="post" th:action="@{/admin/producto/eliminar/{id}(id = ${producto.idProducto})}">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Volver</button>
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

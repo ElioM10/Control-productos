@@ -46,20 +46,4 @@ public class RootController {
 
 
 
-
-    @GetMapping("/admin/editar/{idProducto}")
-    public String editar(Producto producto,Model model){
-    producto = productoService.getProductoById(producto.getIdProducto());
-    model.addAttribute("producto",producto);
-    log.info("producto seleccionado: "+producto.toString());
-    return "redirect:/";
-    }
-
-    @GetMapping("/admin/eliminar/{idProducto}")
-    public String eliminar(Producto producto,Model model){
-        producto = productoService.getProductoById(producto.getIdProducto());
-//        log.info("producto seleccionado: "+producto.toString());
-        productoService.deleteProducto(producto);
-        return "redirect:/";
-    }
 }

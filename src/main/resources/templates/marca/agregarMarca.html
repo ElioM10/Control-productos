@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head('Agregar marca')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<a th:fragment="botonAgregarMarca" class="btn btn-outline-warning mt-2" data-bs-toggle="modal"
+   data-bs-target="#modalAgregarMarca">
+    Agregar
+</a>
+
+<div th:fragment="modalAgregarMarca">
+    <div class="modal fade" tabindex="-1" id="modalAgregarMarca">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar marca</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form th:action="@{/admin/marca/guardar}" method="post">
+                    <input type="hidden" th:value="${idNegocio}" name="idNegocio">
+                    <div class="modal-body">
+                        <label for="nombreMarca">Nombre de la marca:</label>
+                        <input type="text" class="form-control" id="nombreMarca" name="nombreMarca" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <input type="submit" class="btn btn-success" value="Guardar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

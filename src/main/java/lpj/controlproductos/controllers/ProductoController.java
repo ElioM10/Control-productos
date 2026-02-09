@@ -36,37 +36,37 @@ public class ProductoController {
     ProductoService productoService;
 
     @GetMapping("/admin/producto/agregar/{idNegocio}")
-    public String agregarProducto(@PathVariable Long idNegocio,Model model,Producto producto) {
+    public String agregarProducto(@PathVariable Long idNegocio, Model model, Producto producto) {
 
         List<Categoria> categorias = categoriaService.getCategorias();
-        List<Marca> marcas  = marcaService.getMarcas();
+        List<Marca> marcas = marcaService.getMarcas();
 
-        model.addAttribute("categorias",categorias);
-        model.addAttribute("producto",producto);
-        model.addAttribute("marcas",marcas);
 
-        log.info("Se ha creado un producto vacío");
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("producto", producto);
+        model.addAttribute("marcas", marcas);
+
 
         return "producto/agregarProducto";
     }
 
     @GetMapping("/user/negocio/{idNegocio}")
-    public String listarProductos(@PathVariable Long idNegocio, Model model){
+    public String listarProductos(@PathVariable Long idNegocio, Model model) {
 
         Negocio negocio = negocioService.getNegocioById(idNegocio);
 
-        List<Producto> productos = productoService.getProductos();
-        model.addAttribute("productos",productos);
-        model.addAttribute("idNegocio",idNegocio);
+        List<Producto> productos = negocio.getProductos();
+        model.addAttribute("productos", productos);
+        model.addAttribute("idNegocio", idNegocio);
 
         return "producto/listaProductos";
     }
 
     @PostMapping("/admin/producto/guardar")
     public String guardar(@RequestParam Long idNegocio,
-            @RequestParam Long idMarca,
-            @RequestParam Long idCategoria,
-            Producto producto){
+                          @RequestParam Long idMarca,
+                          @RequestParam Long idCategoria,
+                          Producto producto) {
         Negocio negocio = negocioService.getNegocioById(idNegocio);
         Categoria categoria = categoriaService.getCategoriaById(idCategoria);
         Marca marca = marcaService.getMarcaById(idMarca);
@@ -76,7 +76,28 @@ public class ProductoController {
         producto.setMarcaProducto(marca);
 
         productoService.saveProducto(producto);
-        return "redirect:/user/negocio/"+producto.getNegocio().getIdNegocio();
+        log.info("Se ha creado un nuevo producto");
+
+        return "redirect:/user/negocio/" + producto.getNegocio().getIdNegocio();
     }
 
+    @GetMapping("/admin/producto/editar/{idProducto}")
+    public String editar(@PathVariable Long idProducto,Model model) {
+
+        Producto producto = productoService.getProductoById(idProducto);
+        List<Marca> marcas = marcaService.getMarcas();
+        List<Categoria> categorias = categoriaService.getCategorias();
+
+        model.addAttribute("producto",producto);
+        model.addAttribute("marcas",marcas);
+        model.addAttribute("categorias",categorias);
+
+        return "producto/editarProducto";
+    }
+
+    @PostMapping("/admin/producto/eliminar/{idProducto}")
+    public String eliminar(@PathVariable Long idProducto){
+        productoService.deleteProducto(productoService.getProductoById(idProducto));
+        return "redirect:/";
+    }
 }

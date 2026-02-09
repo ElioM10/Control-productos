@@ -2,6 +2,7 @@ package lpj.controlproductos.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
 
@@ -29,6 +30,7 @@ public class Producto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoriaProducto;
+
 
     @ManyToOne
     @JoinColumn(name = "id_marca")
