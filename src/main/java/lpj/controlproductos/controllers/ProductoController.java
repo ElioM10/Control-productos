@@ -41,7 +41,7 @@ public class ProductoController {
         List<Categoria> categorias = categoriaService.getCategorias();
         List<Marca> marcas = marcaService.getMarcas();
 
-
+        model.addAttribute("idNegocio", idNegocio);
         model.addAttribute("categorias", categorias);
         model.addAttribute("producto", producto);
         model.addAttribute("marcas", marcas);
@@ -67,6 +67,13 @@ public class ProductoController {
                           @RequestParam Long idMarca,
                           @RequestParam Long idCategoria,
                           Producto producto) {
+
+        if (producto.getIdProducto() == null) {
+            log.info("Se ha creado un nuevo producto");
+        } else {
+            log.info("Se ha editado el producto con id: " + producto.getIdProducto());
+        }
+
         Negocio negocio = negocioService.getNegocioById(idNegocio);
         Categoria categoria = categoriaService.getCategoriaById(idCategoria);
         Marca marca = marcaService.getMarcaById(idMarca);
@@ -76,28 +83,31 @@ public class ProductoController {
         producto.setMarcaProducto(marca);
 
         productoService.saveProducto(producto);
-        log.info("Se ha creado un nuevo producto");
 
         return "redirect:/user/negocio/" + producto.getNegocio().getIdNegocio();
     }
 
+
     @GetMapping("/admin/producto/editar/{idProducto}")
-    public String editar(@PathVariable Long idProducto,Model model) {
+    public String editar(@PathVariable Long idProducto, Model model) {
 
         Producto producto = productoService.getProductoById(idProducto);
         List<Marca> marcas = marcaService.getMarcas();
         List<Categoria> categorias = categoriaService.getCategorias();
 
-        model.addAttribute("producto",producto);
-        model.addAttribute("marcas",marcas);
-        model.addAttribute("categorias",categorias);
+        model.addAttribute("idNegocio", producto.getNegocio().getIdNegocio());
+        model.addAttribute("producto", producto);
+        model.addAttribute("marcas", marcas);
+        model.addAttribute("categorias", categorias);
 
         return "producto/editarProducto";
     }
 
     @PostMapping("/admin/producto/eliminar/{idProducto}")
-    public String eliminar(@PathVariable Long idProducto){
+    public String eliminar(@PathVariable Long idProducto) {
+        Long idNegocio = productoService.getProductoById(idProducto).getNegocio().getIdNegocio();
+        log.info("Se ha borrado el producto: "+productoService.getProductoById(idProducto).getNombreProducto());
         productoService.deleteProducto(productoService.getProductoById(idProducto));
-        return "redirect:/";
+        return "redirect:/user/negocio/" + idNegocio;
     }
 }

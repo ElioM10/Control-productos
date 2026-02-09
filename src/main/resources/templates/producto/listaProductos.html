@@ -39,9 +39,9 @@
           <td th:text="${producto.nombreProducto}">NombreProducto</td>
           <td th:text="${producto.marcaProducto.nombreMarca}"></td>
           <td th:text="${producto.categoriaProducto.nombreCategoria}"></td>
-          <td th:text="${producto.precioProducto}">1500</td>
+          <td th:text="${#numbers.formatCurrency(producto.precioProducto)}">1500</td>
           <td th:text="${producto.cantidad}">800</td>
-          <td th:text="${producto.total}">1200000</td>
+          <td th:text="${#numbers.formatCurrency(producto.total)}">1200000</td>
           <td><a class="btn btn-outline-light" th:href="@{/admin/producto/editar/{id}(id = ${producto.idProducto})}">
             <i class="fa-solid fa-pen-to-square"></i><span>Editar</span></a></td>
           <td><a th:replace="~{producto/eliminarProducto :: botonEliminarProducto}"></a></td>

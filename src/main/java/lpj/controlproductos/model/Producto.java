@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -19,7 +20,7 @@ public class Producto implements Serializable {
 
     private String descripcion;
 
-    private Double precioProducto;
+    private BigDecimal precioProducto;
 
     private Integer cantidad;
 
@@ -36,11 +37,11 @@ public class Producto implements Serializable {
     @JoinColumn(name = "id_marca")
     private Marca marcaProducto;
 
-    public Double getTotal(){
+    public BigDecimal getTotal(){
         if(precioProducto == null || cantidad == null){
-            return 0.0;
+            return BigDecimal.valueOf(0);
         }else {
-            return precioProducto * cantidad;
+            return precioProducto.multiply(BigDecimal.valueOf(cantidad));
         }
     }
 }

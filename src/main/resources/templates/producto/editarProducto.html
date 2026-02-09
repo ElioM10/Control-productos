@@ -14,6 +14,7 @@
                 </div>
                 <div class="card-body">
                     <form th:action="@{/admin/producto/guardar}" th:object="${producto}" method="post">
+                        <input type="hidden" th:field="*{idProducto}">
                         <input type="hidden" name="idNegocio" th:value="${idNegocio}">
 
                         <div class="mt-3">
