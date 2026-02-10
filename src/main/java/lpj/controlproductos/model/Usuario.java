@@ -1,6 +1,7 @@
 package lpj.controlproductos.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
+@Data
 public class Usuario implements Serializable {
 
     @Id
