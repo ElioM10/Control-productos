@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "rol")
 public class Rol implements Serializable {
 
     @Id

@@ -5,10 +5,12 @@ import lpj.controlproductos.repositories.MarcaRepository;
 import lpj.controlproductos.services.interfaces.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class MarcaServiceImpl implements MarcaService {
 
     @Autowired
@@ -25,11 +27,13 @@ public class MarcaServiceImpl implements MarcaService {
     }
 
     @Override
+    @Transactional
     public Marca saveMarca(Marca marca) {
         return marcaRepository.save(marca);
     }
 
     @Override
+    @Transactional
     public void deleteMarca(Marca marca) {
         marcaRepository.delete(marca);
     }

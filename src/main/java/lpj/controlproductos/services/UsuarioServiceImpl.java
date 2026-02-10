@@ -20,19 +20,18 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional(readOnly = true)
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
 
     @Override
-    @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Usuario getUsuarioById(Long idUsuario) {
         return usuarioRepository.findById(idUsuario).orElse(null);
     }
@@ -50,7 +49,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Usuario usuario = usuarioRepository.findByUsername(username);

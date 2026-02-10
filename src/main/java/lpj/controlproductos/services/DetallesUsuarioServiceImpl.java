@@ -5,10 +5,12 @@ import lpj.controlproductos.repositories.DetallesUsuarioRepository;
 import lpj.controlproductos.services.interfaces.DetallesUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class DetallesUsuarioServiceImpl implements DetallesUsuarioService {
 
     @Autowired
@@ -25,11 +27,13 @@ public class DetallesUsuarioServiceImpl implements DetallesUsuarioService {
     }
 
     @Override
+    @Transactional
     public DetallesUsuario saveDetallesUsuario(DetallesUsuario detallesUsuario) {
         return detallesUsuarioRepository.save(detallesUsuario);
     }
 
     @Override
+    @Transactional
     public void deleteDetallesUsuario(DetallesUsuario detallesUsuario) {
         detallesUsuarioRepository.delete(detallesUsuario);
     }

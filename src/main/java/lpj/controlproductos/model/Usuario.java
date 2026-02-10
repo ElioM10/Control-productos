@@ -1,6 +1,7 @@
 package lpj.controlproductos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 
@@ -16,8 +17,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
+    @NotEmpty(message = "Debe ingresar un nombre de usuario")
     private String username;
 
+    @NotEmpty(message = "Debe ingresar una contrasena")
     private String password;
 
     @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY)

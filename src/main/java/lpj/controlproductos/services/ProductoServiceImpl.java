@@ -10,19 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
     ProductoRepository productoRepository;
 
     @Override
-    @Transactional(readOnly = true)
     public Producto getProductoById(Long idProducto) {
         return productoRepository.findById(idProducto).orElse(null);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Producto> getProductos() {
         return productoRepository.findAll();
     }

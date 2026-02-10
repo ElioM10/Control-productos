@@ -6,10 +6,12 @@ import lpj.controlproductos.services.interfaces.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class CategoriaServiceImpl implements CategoriaService, Converter<String,Categoria> {
 
     @Autowired
@@ -26,17 +28,19 @@ public class CategoriaServiceImpl implements CategoriaService, Converter<String,
     }
 
     @Override
+    @Transactional
     public Categoria saveCategoria(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
     @Override
+    @Transactional
     public void deleteCategoria(Categoria categoria) {
         categoriaRepository.delete(categoria);
     }
 
     @Override
-    public Categoria convert(String idCategroia) {
-        return categoriaRepository.findById(Long.valueOf(idCategroia)).orElse(null);
+    public Categoria convert(String idCategoria) {
+        return categoriaRepository.findById(Long.valueOf(idCategoria)).orElse(null);
     }
 }
