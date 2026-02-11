@@ -15,6 +15,8 @@ public interface UsuarioService {
 
     public void deleteUsuario(Usuario usuario);
 
+    public boolean existePorUsername(String username);
+
 }
 
 

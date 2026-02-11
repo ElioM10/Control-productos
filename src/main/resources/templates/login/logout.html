@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<button th:fragment="botonCerrarSesion" class="btn btn-outline-light" type="button" data-bs-target="#modalCerrarSesion" data-bs-toggle="modal">
+    <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Cerrar sesión</span>
+</button>
+
+<div th:fragment="cerrarSesion">
+    <div class="modal fade" id="modalCerrarSesion" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Confirmar</h1>
+                    <button class="btn-close" type="button" data-bs-toggle="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>¿Seguro que desea cerrar sesión?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal">Volver</button>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

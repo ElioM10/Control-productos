@@ -49,6 +49,10 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         log.info("contraseña sin codificar: "+usuario.getPassword());
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         log.info("contraseña codificada: "+usuario.getPassword());
+
+        DetallesUsuario detallesUsuario = new DetallesUsuario();
+        detallesUsuario.setUsuario(usuario);
+
         return usuarioRepository.save(usuario);
     }
 
@@ -77,6 +81,10 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         return new User(usuario.getUsername()
                 , usuario.getPassword(),
                 roles);
+    }
+
+    public boolean existePorUsername(String username){
+        return usuarioRepository.existsByUsername(username);
     }
 
 }

@@ -2,6 +2,7 @@
 <head th:replace="~{layout/plantilla :: head('Eliminar Producto')}"></head>
 <body>
 
+
 <a class="btn btn-outline-danger"
    th:fragment="botonEliminarProducto" data-bs-toggle="modal"
    th:attr="data-bs-target='#modalEliminarProducto' + ${producto.idProducto}"><i class="fa-solid fa-trash"></i><span>Eliminar</span></a>

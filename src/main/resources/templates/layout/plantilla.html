@@ -13,7 +13,8 @@
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
 
-        <a class="navbar-brand fs-2" th:href="@{/}"><i class="fa-solid fa-book"></i> <span th:text="#{header.titulo}"></span></a>
+        <a class="navbar-brand fs-2" th:href="@{/}"><i class="fa-solid fa-book"></i> <span
+                th:text="#{header.titulo}"></span></a>
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"></button>
 
@@ -50,20 +51,20 @@
                     <i class="fa-solid fa-user"></i><span class="mx-2">Iniciar sesión</span>
                 </a>
 
-                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                    <button  class="btn btn-outline-light" type="submit">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Cerrar sesión</span>
-                    </button>
-                </form>
+                <div sec:authorize="isAuthenticated()">
+                    <button th:replace="~{login/logout :: botonCerrarSesion}"></button>
+                    <div th:replace="~{login/logout :: cerrarSesion}"></div>
+                </div>
 
             </div>
         </div>
     </div>
 </nav>
 
+
 <footer th:fragment="footer" data-bs-theme="dark">
-    <div class="bg-primary row mt-md-5 text-center p-5">
-        <h3>Derechos reservados</h3>
+    <div class="bg-primary mt-md-5 text-center p-5">
+        <a target="_blank" class="text-white fs-3 text-decoration-none" href="https://github.com/Weliottt"><i class="fa-brands fa-github"></i> <span>Weliottt</span></a>
     </div>
 </footer>
 
