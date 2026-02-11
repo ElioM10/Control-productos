@@ -1,5 +1,7 @@
-
-<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+      data-bs-theme="dark">
 
 <head th:replace="~{/layout/plantilla :: head('Productos')}"></head>
 
@@ -7,7 +9,7 @@
 
 <header th:replace="~{/layout/plantilla :: navbar}"></header>
 
-<nav>
+<nav sec:authorize="hasRole('ROLE_ADMIN')">
   <div class="container">
     <div class="row">
       <div class="mt-3 text-center">
@@ -32,7 +34,7 @@
           <th>Precio por unidad</th>
           <th>Cantidad</th>
           <th>Total</th>
-          <th colspan="2">Acciones</th>
+          <th sec:authorize="hasRole('ROLE_ADMIN')" colspan="2">Acciones</th>
         </tr>
         <tr th:each="producto : ${productos}">
           <td th:text="${producto.idProducto}">1</td>
@@ -42,10 +44,15 @@
           <td th:text="${#numbers.formatCurrency(producto.precioProducto)}">1500</td>
           <td th:text="${producto.cantidad}">800</td>
           <td th:text="${#numbers.formatCurrency(producto.total)}">1200000</td>
-          <td><a class="btn btn-outline-light" th:href="@{/admin/producto/editar/{id}(id = ${producto.idProducto})}">
+
+          <td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-outline-light" th:href="@{/admin/producto/editar/{id}(id = ${producto.idProducto})}">
             <i class="fa-solid fa-pen-to-square"></i><span>Editar</span></a></td>
-          <td><a th:replace="~{producto/eliminarProducto :: botonEliminarProducto}"></a></td>
+
+          <td sec:authorize="hasRole('ROLE_ADMIN')" >
+            <a th:replace="~{producto/eliminarProducto :: botonEliminarProducto}"></a></td>
         </tr>
+
       </table>
     </div>
   </div>

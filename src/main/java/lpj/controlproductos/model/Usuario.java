@@ -3,6 +3,7 @@ package lpj.controlproductos.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 
 import java.io.Serializable;

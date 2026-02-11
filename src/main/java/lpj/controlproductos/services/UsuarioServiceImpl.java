@@ -1,5 +1,6 @@
 package lpj.controlproductos.services;
 
+import lombok.extern.slf4j.Slf4j;
 import lpj.controlproductos.model.DetallesUsuario;
 import lpj.controlproductos.model.Rol;
 import lpj.controlproductos.model.Usuario;
@@ -12,6 +13,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,10 +24,14 @@ import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
+@Slf4j
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public List<Usuario> getUsuarios() {
@@ -39,6 +46,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     @Override
     @Transactional
     public Usuario saveUsuario(Usuario usuario) {
+        log.info("contraseña sin codificar: "+usuario.getPassword());
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        log.info("contraseña codificada: "+usuario.getPassword());
         return usuarioRepository.save(usuario);
     }
 

@@ -2,10 +2,9 @@ package lpj.controlproductos.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import lpj.controlproductos.model.Negocio;
-import lpj.controlproductos.services.interfaces.CategoriaService;
-import lpj.controlproductos.services.interfaces.MarcaService;
-import lpj.controlproductos.services.interfaces.NegocioService;
-import lpj.controlproductos.services.interfaces.ProductoService;
+import lpj.controlproductos.model.Usuario;
+import lpj.controlproductos.repositories.UsuarioRepository;
+import lpj.controlproductos.services.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +19,9 @@ public class RootController {
 
     @Autowired
     NegocioService negocioService;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @GetMapping("/")
     public String inicio(Model model) {
@@ -37,14 +39,16 @@ public class RootController {
     }
 
     @GetMapping("/register")
-    public String mostrarForm(){
+    public String mostrarForm(Model model){
+        model.addAttribute("usuario",new Usuario());
         return "login/register";
     }
 
     @PostMapping("/register")
-    public String guardarUsuario(){
-
-        return "";
+    public String guardarUsuario(Usuario usuario){
+        log.info("Se ha creado un nuevo usuario");
+        usuarioService.saveUsuario(usuario);
+        return "redirect:/login";
     }
 
 }

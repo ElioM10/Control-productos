@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:text="${title}">Título</title>
-
-
     <!--            Bootstrap           -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/7.1.0/css/all.css}">
     <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
 </head>
-
-<body>
 
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -49,13 +46,15 @@
                     </ul>
                 </div>
 
-                <a class="btn btn-outline-light ms-auto" th:href="@{/login}">
+                <a sec:authorize="!isAuthenticated()" class="btn btn-outline-light" th:href="@{/login}">
                     <i class="fa-solid fa-user"></i><span class="mx-2">Iniciar sesión</span>
                 </a>
 
-                <a class="btn btn-outline-light ms-auto" href="/logout">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Cerrar sesión</span>
-                </a>
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                    <button  class="btn btn-outline-light" type="submit">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Cerrar sesión</span>
+                    </button>
+                </form>
 
             </div>
         </div>
@@ -68,5 +67,3 @@
     </div>
 </footer>
 
-</body>
-</html>

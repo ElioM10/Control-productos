@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
 <head th:replace="~{/layout/plantilla :: head('Listar Negocios')}">
     <meta charset="UTF-8">
     <title></title>
@@ -14,8 +16,8 @@
             <div class="card-header d-flex justify-content-between align-items-center">
               <h1 class="card-title" th:text="${negocio.nombreNegocio}">Mi negocio</h1>
               <div class="d-flex gap-2">
-                <a class="btn btn-outline-secondary" th:href="@{/admin/negocio/editar/{id}(id=${negocio.idNegocio})}"><i class="fa-solid fa-pen-to-square"></i> </a>
-                <a th:replace="~{negocio/eliminarNegocio :: botonEliminarNegocio}" ></a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-outline-secondary" th:href="@{/admin/negocio/editar/{id}(id=${negocio.idNegocio})}"><i class="fa-solid fa-pen-to-square"></i> </a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:replace="~{negocio/eliminarNegocio :: botonEliminarNegocio}" ></a>
               </div>
             </div>
             <div class="card-body">

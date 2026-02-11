@@ -23,9 +23,10 @@ public class SecurityConfig {
                 auth.requestMatchers("/login","/","/register").permitAll()
                         .requestMatchers("/admin/..").hasRole("ADMIN")
                         .requestMatchers("/user/..").hasAnyRole("ADMIN","USER")
+                        .anyRequest().authenticated()
                 )
                 .formLogin(login ->
-                        login.loginPage("/login/login").permitAll()
+                        login.loginPage("/login").permitAll()
                 );
 
         return http.build();
